@@ -1,6 +1,6 @@
 # My Email Builder — Beefree SDK + React
 
-Meet the beefree email builder using the [Beefree SDK](https://docs.beefree.io/beefree-sdk) email builder! This current implementation is in React (Vite + TypeScript), however, we offer many other compeling flavors (Angular, Vue, and Django! INSERT_DOCS_LINK_HERE). This app has a secure backend proxy for authentication and a developer-facing output panel that captures the editor's save results. Feel free to clone it as a launching point or use it to reference/debug your own applications!
+Meet the beefree email builder using the [Beefree SDK](https://docs.beefree.io/beefree-sdk) email builder! This current implementation is in React (Vite + TypeScript), however, we offer many other compeling flavors (Angular, Vue, and Django! [DOCS](https://docs.beefree.io/beefree-sdk)). This app has a secure backend proxy for authentication and a developer-facing output panel that captures the editor's save results. Feel free to clone it as a launching point or use it to reference/debug your own applications!
 
 ![Beefree editor embedded in the app with the Developer Output panel showing a captured save](docs/screenshots/app-overview.png)
 
