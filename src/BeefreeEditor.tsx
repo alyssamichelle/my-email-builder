@@ -70,9 +70,9 @@ export default function BeefreeEditor() {
     setSaveError(null);
   }
 
-  function onSaveAsTemplate(pageJson: string) {
-    console.log('Template saved!', pageJson);
-  }
+  // function onSaveAsTemplate(pageJson: string) {
+  //   console.log('Template saved!', pageJson);
+  // }
 
   function onError(error: BeePluginError) {
     console.error('Error:', error);
@@ -87,7 +87,8 @@ export default function BeefreeEditor() {
       <div style={{ marginBottom: '1rem' }}>
         <button onClick={() => preview()}>Preview</button>
         <button onClick={handleSave}>Save</button>
-        <button onClick={() => saveAsTemplate()}>Save as Template</button>
+        {/* Todo: fix this non working button. */}
+        {/* <button onClick={() => saveAsTemplate()}>Save as Template</button> */}
       </div>
       <Builder
         id={id}
@@ -96,7 +97,7 @@ export default function BeefreeEditor() {
         height="600px"
         onLoad={() => console.log('Builder is ready')}
         onSave={onSave}
-        onSaveAsTemplate={onSaveAsTemplate}
+        // onSaveAsTemplate={onSaveAsTemplate}
         onError={onError}
       />
       <DeveloperOutput
