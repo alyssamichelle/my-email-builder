@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Builder, useBuilder } from '@beefree.io/react-email-builder';
-import type { IBeeConfig, IEntityContentJson, IToken } from '@beefree.io/react-email-builder';
+import type { IBeeConfig, IEntityContentJson, IToken, BeePluginError } from '@beefree.io/react-email-builder';
 
 const BLANK_TEMPLATE: IEntityContentJson = {
   comments: {},
@@ -74,10 +74,10 @@ export default function BeefreeEditor() {
     console.log('Template saved!', pageJson);
   }
 
-  function onError(error: Error) {
+  function onError(error: BeePluginError) {
     console.error('Error:', error);
     setSaveStatus('error');
-    setSaveError(error instanceof Error ? error.message : 'Beefree editor reported an error.');
+    setSaveError(error?.message ?? 'Beefree editor reported an error.');
   }
 
   if (!token) return <div>Loading editor...</div>;
@@ -93,6 +93,7 @@ export default function BeefreeEditor() {
         id={id}
         token={token}
         template={BLANK_TEMPLATE}
+        height="600px"
         onLoad={() => console.log('Builder is ready')}
         onSave={onSave}
         onSaveAsTemplate={onSaveAsTemplate}
