@@ -10,6 +10,7 @@ const BLANK_TEMPLATE: IEntityContentJson = {
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
 export default function BeefreeEditor() {
+  // Curious if it should be undefined or null, but null is the default and what the docs use.
   const [token, setToken] = useState<IToken | null>(null);
 
   // Developer-facing output captured from the Beefree save flow.
@@ -58,6 +59,27 @@ export default function BeefreeEditor() {
     fetchToken();
   }, []);
 
+  function onSave(pageJson: string, pageHtml: string) {
+    console.log('Saved!', { pageJson, pageHtml });
+    // pageHtml is provided by the onSave callback, so no server-side
+    // (Content Services API) export is needed for this feature.
+    setSavedJson(pageJson ?? null);
+    setSavedHtml(pageHtml ?? null);
+    setLastSavedAt(new Date().toISOString());
+    setSaveStatus('saved');
+    setSaveError(null);
+  }
+
+  function onSaveAsTemplate(pageJson: string) {
+    console.log('Template saved!', pageJson);
+  }
+
+  function onError(error: Error) {
+    console.error('Error:', error);
+    setSaveStatus('error');
+    setSaveError(error instanceof Error ? error.message : 'Beefree editor reported an error.');
+  }
+
   if (!token) return <div>Loading editor...</div>;
 
   return (
@@ -72,26 +94,9 @@ export default function BeefreeEditor() {
         token={token}
         template={BLANK_TEMPLATE}
         onLoad={() => console.log('Builder is ready')}
-        onSave={(pageJson: string, pageHtml: string) => {
-          console.log('Saved!', { pageJson, pageHtml });
-          // pageHtml is provided by the onSave callback, so no server-side
-          // (Content Services API) export is needed for this feature.
-          setSavedJson(pageJson ?? null);
-          setSavedHtml(pageHtml ?? null);
-          setLastSavedAt(new Date().toISOString());
-          setSaveStatus('saved');
-          setSaveError(null);
-        }}
-        onSaveAsTemplate={(pageJson: string) => {
-          console.log('Template saved!', pageJson);
-        }}
-        onError={(error) => {
-          console.error('Error:', error);
-          setSaveStatus('error');
-          setSaveError(
-            error instanceof Error ? error.message : 'Beefree editor reported an error.'
-          );
-        }}
+        onSave={onSave}
+        onSaveAsTemplate={onSaveAsTemplate}
+        onError={onError}
       />
       <DeveloperOutput
         status={saveStatus}
