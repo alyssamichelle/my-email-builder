@@ -26,7 +26,7 @@ export default function BeefreeEditor() {
     language: 'en-US',
   };
 
-  const { id, save, preview, saveAsTemplate, load } = useBuilder(config);
+  const { id, save, preview, saveAsTemplate } = useBuilder(config);
 
   async function handleSave() {
     // Guard against the editor not being ready yet (missing instance).

@@ -15,6 +15,9 @@ dist-ssr
 # Environment variables (never commit credentials)
 .env
 
+# Playwright MCP artifacts (snapshots, console logs, ad-hoc screenshots)
+.playwright-mcp
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
